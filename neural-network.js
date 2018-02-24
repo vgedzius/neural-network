@@ -3,6 +3,7 @@ class NeuralNetwork {
     this.layers = layers;
     this.neurons = [];
     this.weights = [];
+    this.fitness = 0;
 
     this.initNeurons();
     this.initWeights();
@@ -66,20 +67,36 @@ class NeuralNetwork {
           } else if (random < 8) {
             let factor = Math.random();
             return weight * factor;
+          } else {
+            return weight;
           }
         });
       });
     });
-    
+
     return this;
   }
 
   clone() {
-    const copy = new NeuralNetwork();
-    copy.layers = this.layers;
+    const copy = new NeuralNetwork(this.layers);
     copy.neurons = this.neurons;
     copy.weights = this.weights;
 
     return copy;
   }
+
+  calculateFitness(data) {
+    let error = 0;
+    data.forEach((i) => {
+      
+      let output = this.feedForward(i.inputs);
+      error += Math.abs(i.target - output[0]);
+    });
+    
+    this.fitness = 1 / error;
+
+    return this;
+  }
 }
+
+module.exports = NeuralNetwork;
