@@ -1,3 +1,3 @@
 # neural-network
 
-run node main.js
+To run `node main.js`
