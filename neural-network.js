@@ -70,5 +70,16 @@ class NeuralNetwork {
         });
       });
     });
+    
+    return this;
+  }
+
+  clone() {
+    const copy = new NeuralNetwork();
+    copy.layers = this.layers;
+    copy.neurons = this.neurons;
+    copy.weights = this.weights;
+
+    return copy;
   }
 }
